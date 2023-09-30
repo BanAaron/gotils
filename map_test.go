@@ -8,7 +8,8 @@ import (
 func TestOrderedKeysEmptyMap(t *testing.T) {
 	var emptyMap map[int]string
 	keys := OrderedKeys(emptyMap)
-	if keys != nil || len(keys) != 0 {
+	var target []int
+	if !reflect.DeepEqual(keys, target) {
 		t.Errorf("empty map failed: %v", keys)
 	}
 }
