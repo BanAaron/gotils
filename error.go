@@ -1,11 +1,7 @@
 package gotils
 
-func HandleError(err error) (result error) {
+func HandleError(err error) {
 	if err != nil {
-		result = err
-		defer func() {
-			panic(err)
-		}()
+		panic(err)
 	}
-	return
 }

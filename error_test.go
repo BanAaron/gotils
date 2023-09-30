@@ -7,8 +7,5 @@ import (
 
 func TestHandleErrorNil(t *testing.T) {
 	var err error
-	res := gotils.HandleError(err)
-	if res != nil {
-		t.Errorf("handle error nil failed: %s", res)
-	}
+	gotils.HandleError(err)
 }
