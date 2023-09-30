@@ -1,6 +1,7 @@
 package gotils
 
 // LeftPad prefixes X number of spaces to the 'input' string
+// where X = spaces uint
 func LeftPad(input string, spaces uint) (result string) {
 	pad := ""
 	var i uint
