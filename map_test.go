@@ -7,7 +7,7 @@ import (
 
 func TestOrderedKeysEmptyMap(t *testing.T) {
 	var emptyMap map[int]string
-	keys := OrderedKeys(emptyMap)
+	keys := OrderedKeys(emptyMap, false)
 	var target []int
 	if !reflect.DeepEqual(keys, target) {
 		t.Errorf("empty map failed: %v", keys)
@@ -22,7 +22,7 @@ func TestOrderedKeysInt(t *testing.T) {
 		2: "",
 	}
 	target := []int{1, 2, 3, 4}
-	keys := OrderedKeys(mapInt)
+	keys := OrderedKeys(mapInt, false)
 	if !reflect.DeepEqual(keys, target) {
 		t.Errorf("int map failed: %v", keys)
 	}
@@ -36,7 +36,7 @@ func TestOrderedKeysNegativeInt(t *testing.T) {
 		-10: "",
 	}
 	target := []int{-10, -1, 2, 5}
-	keys := OrderedKeys(mapInt)
+	keys := OrderedKeys(mapInt, false)
 	if !reflect.DeepEqual(keys, target) {
 		t.Errorf("int map failed: %v", keys)
 	}
@@ -50,7 +50,7 @@ func TestOrderedKeysString(t *testing.T) {
 		"drew":  40,
 	}
 	target := []string{"aaron", "chris", "drew", "jamie"}
-	keys := OrderedKeys(mapInt)
+	keys := OrderedKeys(mapInt, false)
 	if !reflect.DeepEqual(keys, target) {
 		t.Errorf("int map failed: %v", keys)
 	}
@@ -63,8 +63,21 @@ func TestOrderedKeysFloat(t *testing.T) {
 		-55.55: "fives",
 	}
 	target := []float64{-55.55, 3.14, 420.69}
-	keys := OrderedKeys(mapInt)
+	keys := OrderedKeys(mapInt, false)
 	if !reflect.DeepEqual(keys, target) {
 		t.Errorf("int map failed: %v", keys)
+	}
+}
+
+func TestOrderedKeysReverse(t *testing.T) {
+	mapInt := map[int]string{
+		5: "nice",
+		4: "frog",
+		3: "bro",
+	}
+	target := []int{5, 4, 3}
+	keys := OrderedKeys(mapInt, true)
+	if !reflect.DeepEqual(keys, target) {
+		t.Errorf("reverse test failed: %v", keys)
 	}
 }

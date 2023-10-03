@@ -13,10 +13,14 @@ type ordered interface {
 
 // OrderedKeys takes an input map as an argument and returns a slice of keys in
 // ascending order.
-func OrderedKeys[Key ordered, Value any](input map[Key]Value) (keys []Key) {
+func OrderedKeys[Key ordered, Value any](input map[Key]Value, reverse bool) (keys []Key) {
 	for k := range input {
 		keys = append(keys, k)
 	}
-	sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
+	if reverse {
+		sort.Slice(keys, func(i, j int) bool { return keys[i] > keys[j] })
+	} else {
+		sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
+	}
 	return
 }
